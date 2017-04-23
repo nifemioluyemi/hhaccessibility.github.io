@@ -3,6 +3,7 @@
 	<script src="/js/jquery-3.1.1.js"  type="text/javascript"></script>
 	<script src="/js/home.js" type="text/javascript"></script>
 	<script src="/js/hover_text.js" type="text/javascript"></script>
+	<script src="/js/datalist.polyfill.js"></script>	
 	<script type="text/javascript" async defer
 		src="//maps.googleapis.com/maps/api/js?key={{ $google_map_api_key }}&amp;callback=initMap">
 	</script>
@@ -47,9 +48,11 @@
 					{{ csrf_field() }}
 					<form role="search" action="/location-search">
 						<datalist id="location_search_options">
+							<!--[if lte IE 9]><select data-datalist="location_search_options"><![endif]-->
 							@foreach ($location_search_options as $option)
 								<option value="{{ $option->content }}">
 							@endforeach
+							<!--[if lte IE 9]></select><![endif]-->
 						</datalist>
 						<input
 							list="location_search_options"
